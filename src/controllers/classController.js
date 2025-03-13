@@ -77,6 +77,9 @@ const classController = {
         return handleError(res, 400, "Bad Request");
       }
       const classInfo = await Class.findById(classId);
+      if (!classInfo) {
+        return handleError(res, 404, "Class Not Found");
+      }
       return handleSuccess(res, classInfo, 200, "Get One Class Success");
     } catch (error) {
       return handleError(res, 500, error?.message);

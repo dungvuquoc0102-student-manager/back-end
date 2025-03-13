@@ -2,6 +2,7 @@ import express from "express";
 import connectDB from "./src/config/connectDB.js";
 import router from "./src/routes/index.js";
 import { handleError } from "./src/utils/handleResponse.js";
+import cors from "cors";
 const app = express();
 
 //use before middleware
@@ -9,6 +10,8 @@ const app = express();
 app.use(express.json());
 //use middleware to parse request (application/x-www-form-urlencoded) to req.body as an object
 app.use(express.urlencoded({ extended: true }));
+//use middleware to allow request from other domain
+app.use(cors());
 
 //user router to route for app
 app.use(router);
